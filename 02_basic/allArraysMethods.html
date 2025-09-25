@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive JavaScript Array Methods Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap");
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f0f4f8;
+      }
+      .font-fira-code {
+        font-family: "Fira Code", monospace;
+      }
+      .sidebar-item-active {
+        background-color: #dbeafe;
+        color: #1e3a8a;
+        font-weight: 600;
+      }
+      .console-output {
+        background-color: #0f172a;
+        color: #e2e8f0;
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        min-height: 10rem;
+        overflow-y: auto;
+      }
+      .code-block {
+        background-color: #f1f5f9;
+        border: 1px solid #e2e8f0;
+        border-radius: 0.5rem;
+      }
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #e2e8f0;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #94a3b8;
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #64748b;
+      }
+      .card {
+        background-color: #ffffff;
+        border-radius: 1.25rem;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        padding: 2rem;
+      }
+    </style>
+    <!-- Chosen Palette: Indigo Slate -->
+    <!-- Application Structure Plan: The application uses a three-part layout for optimal learning: a filterable navigation sidebar for quick access, a central panel for detailed explanations, and a right-hand interactive console. This structure separates concerns, allowing users to easily find a method, understand its purpose, and then immediately test its functionality without context switching. This is superior to a linear document as it supports both quick look-ups and hands-on experimentation, which is crucial for developer education. -->
+    <!-- Visualization & Content Choices: Instead of data visualizations, this app visualizes code execution. Report Info: List of array methods. -> Goal: Organize & allow quick lookup. -> Presentation: A categorized and searchable sidebar. -> Interaction: Click to select, search to filter. -> Justification: Far more efficient than scrolling a long document. Report Info: Code examples. -> Goal: Teach practical application. -> Presentation: An interactive code runner. -> Interaction: A "Run" button executes the code and displays live output. -> Justification: Active, hands-on learning is more effective for retaining technical concepts than passive reading. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+  </head>
+  <body class="text-slate-700">
+    <div class="container mx-auto px-4 py-8 md:px-8 lg:px-12">
+      <header class="text-center mb-10">
+        <h1
+          class="text-4xl md:text-5xl font-bold text-indigo-900 leading-tight"
+        >
+          इंटरैक्टिव जावास्क्रिप्ट ऐरे मेथड्स गाइड
+        </h1>
+        <p class="text-slate-600 mt-2 text-lg">
+          जावास्क्रिप्ट ऐरे मैनिपुलेशन के लिए आपकी व्यावहारिक गाइड।
+        </p>
+      </header>
+
+      <main class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <aside class="lg:col-span-3 card h-full">
+          <div class="mb-4">
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="🔎 मेथड्स फ़िल्टर करें..."
+              class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
+            />
+          </div>
+          <nav id="methodsNav" class="max-h-[70vh] overflow-y-auto pr-2"></nav>
+        </aside>
+
+        <div class="lg:col-span-9 grid grid-cols-1 md:grid-cols-2 gap-8">
+          <section id="methodDetails" class="md:col-span-1 card"></section>
+
+          <section
+            id="interactiveExample"
+            class="md:col-span-1 card flex flex-col"
+          ></section>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      const arrayMethodsData = [
+        {
+          name: "push()",
+          category: "म्यूटेटर",
+          description:
+            "ऐरे के अंत में एक या अधिक एलिमेंट जोड़ता है और ऐरे की नई लंबाई लौटाता है।",
+          syntax: "array.push(element1, ..., elementN)",
+          mutates: true,
+          example: () => {
+            let logOutput = [];
+            const initialArray = ["apple", "banana"];
+            logOutput.push(
+              `// Initial Array:\nconst fruits = ${JSON.stringify(
+                initialArray
+              )};\n`
+            );
+            const newLength = initialArray.push("orange");
+            logOutput.push(`// After fruits.push('orange'):`);
+            logOutput.push(
+              `Modified fruits array: ${JSON.stringify(initialArray)}`
+            );
+            logOutput.push(`Returned new length: ${newLength}`);
+            return logOutput.join("\n");
+          },
+        },
+        {
+          name: "pop()",
+          category: "म्यूटेटर",
+          description:
+            "ऐरे से अंतिम एलिमेंट हटाता है और उस एलिमेंट को लौटाता है।",
+          syntax: "array.pop()",
+          mutates: true,
+          example: () => {
+            let logOutput = [];
+            const initialArray = ["apple", "banana", "orange"];
+            logOutput.push(
+              `// Initial Array:\nconst fruits = ${JSON.stringify(
+                initialArray
+              )};\n`
+            );
+            const lastFruit = initialArray.pop();
+            logOutput.push(`// After fruits.pop():`);
+            logOutput.push(
+              `Modified fruits array: ${JSON.stringify(initialArray)}`
+            );
+            logOutput.push(`Returned element: '${lastFruit}'`);
+            return logOutput.join("\n");
+          },
+        },
+        {
+          name: "shift()",
+          category: "म्यूटेटर",
+          description:
+            "ऐरे से पहला एलिमेंट हटाता है और उस एलिमेंट को लौटाता है।",
+          syntax: "array.shift()",
+          mutates: true,
+          example: () => {
+            let logOutput = [];
+            const initialArray = ["apple", "banana", "orange"];
+            logOutput.push(
+              `// Initial Array:\nconst fruits = ${JSON.stringify(
+                initialArray
+              )};\n`
+            );
+            const firstFruit = initialArray.shift();
+            logOutput.push(`// After fruits.shift():`);
+            logOutput.push(
+              `Modified fruits array: ${JSON.stringify(initialArray)}`
+            );
+            logOutput.push(`Returned element: '${firstFruit}'`);
+            return logOutput.join("\n");
+          },
+        },
+        {
+          name: "unshift()",
+          category: "म्यूटेटर",
+          description:
+            "ऐरे के शुरुआत में एक या अधिक एलिमेंट जोड़ता है और ऐरे की नई लंबाई लौटाता है।",
+          syntax: "array.unshift(element1, ..., elementN)",
+          mutates: true,
+          example: () => {
+            let logOutput = [];
+            const initialArray = ["banana", "orange"];
+            logOutput.push(
+              `// Initial Array:\nconst fruits = ${JSON.stringify(
+                initialArray
+              )};\n`
+            );
+            const newLength = initialArray.unshift("apple");
+            logOutput.push(`// After fruits.unshift('apple'):`);
+            logOutput.push(
+              `Modified fruits array: ${JSON.stringify(initialArray)}`
+            );
+            logOutput.push(`Returned new length: ${newLength}`);
+            return logOutput.join("\n");
+          },
+        },
+        {
+          name: "splice()",
+          category: "म्यूटेटर",
+          description:
+            "मौजूदा एलिमेंट्स को हटाकर या बदलकर, और/या नए एलिमेंट्स जोड़कर ऐरे की सामग्री को बदलता है।",
+          syntax: "array.splice(start, deleteCount, item1, ...)",
+          mutates: true,
+          example: () => {
+            let logOutput = [];
+            const initialArray = ["apple", "banana", "cherry", "date"];
+            logOutput.push(
+              `// Initial Array:\nconst fruits = ${JSON.stringify(
+                initialArray
+              )};\n`
+            );
+            const removed = initialArray.splice(1, 2, "grape");
+            logOutput.push(`// After fruits.splice(1, 2, 'grape'):`);
+            logOutput.push(
+              `Modified fruits array: ${JSON.stringify(initialArray)}`
+            );
+            logOutput.push(
+              `Returned removed elements: ${JSON.stringify(removed)}`
+            );
+            return logOutput.join("\n");
+          },
+        },
+        {
+          name: "sort()",
+          category: "म्यूटेटर",
+          description:
+            "एक ऐरे के एलिमेंट्स को जगह पर ही सॉर्ट करता है और सॉर्टेड ऐरे को लौटाता है।",
+          syntax: "array.sort(compareFunction)",
+          mutates: true,
+          example: () => {
+            let logOutput = [];
+            const initialArray = [5, 2, 8, 1, 4];
+            logOutput.push(
+              `// Initial Array:\nconst numbers = ${JSON.stringify(
+                initialArray
+              )};\n`
+            );
+            initialArray.sort((a, b) => a - b);
+            logOutput.push(`// After numbers.sort((a, b) => a - b):`);
+            logOutput.push(
+              `Modified numbers array: ${JSON.stringify(initialArray)}`
+            );
+            return logOutput.join("\n");
+          },
+        },
+        {
+          name: "reverse()",
+          category: "म्यूटेटर",
+          description:
+            "एक ऐरे को जगह पर ही उल्टा करता है। पहला ऐरे एलिमेंट अंतिम बन जाता है, और अंतिम ऐरे एलिमेंट पहला बन जाता है।",
+          syntax: "array.reverse()",
+          mutates: true,
+          example: () => {
+            let logOutput = [];
+            const initialArray = [1, 2, 3, 4];
+            logOutput.push(
+              `// Initial Array:\nconst items = ${JSON.stringify(
+                initialArray
+              )};\n`
+            );
+            initialArray.reverse();
+            logOutput.push(`// After items.reverse():`);
+            logOutput.push(
+              `Modified items array: ${JSON.stringify(initialArray)}`
+            );
+            return logOutput.join("\n");
+          },
+        },
+        {
+          name: "fill()",
+          category: "म्यूटेटर",
+          description:
+            "एक ऐरे के सभी एलिमेंट्स को एक शुरूआती इंडेक्स से एक अंतिम इंडेक्स तक एक स्थिर मान से भरता है।",
+          syntax: "array.fill(value, start, end)",
+          mutates: true,
+          example: () => {
+            let logOutput = [];
+            const initialArray = [1, 2, 3, 4];
+            logOutput.push(
+              `// Initial Array:\nconst numbers = ${JSON.stringify(
+                initialArray
+              )};\n`
+            );
+            initialArray.fill(0, 2, 4);
+            logOutput.push(`// After numbers.fill(0, 2, 4):`);
+            logOutput.push(
+              `Modified numbers array: ${JSON.stringify(initialArray)}`
+            );
+            return logOutput.join("\n");
+          },
+        },
+        {
+          name: "copyWithin()",
+          category: "म्यूटेटर",
+          description:
+            "एक ही ऐरे में एक हिस्से की उथली कॉपी को दूसरे स्थान पर कॉपी करता है और इसे लौटाता है, बिना इसकी लंबाई को बदले।",
+          syntax: "array.copyWithin(target, start, end)",
+          mutates: true,
+          example: () => {
+            let logOutput = [];
+            const initialArray = ["a", "b", "c", "d", "e"];
+            logOutput.push(
+              `// Initial Array:\nconst letters = ${JSON.stringify(
+                initialArray
+              )};\n`
+            );
+            initialArray.copyWithin(0, 3, 4);
+            logOutput.push(`// After letters.copyWithin(0, 3, 4):`);
+            logOutput.push(
+              `Modified letters array: ${JSON.stringify(initialArray)}`
+            );
+            return logOutput.join("\n");
+          },
+        },
+        {
+          name: "slice()",
+          category: "एक्सेसर",
+          description:
+            "एक ऐरे के एक हिस्से की उथली कॉपी को एक नए ऐरे ऑब्जेक्ट में लौटाता है। मूल ऐरे संशोधित नहीं होता है।",
+          syntax: "array.slice(start, end)",
+          mutates: false,
+          example: () => {
+            let logOutput = [];
+            const initialArray = [
+              "apple",
+              "banana",
+              "cherry",
+              "date",
+              "elderberry",
+            ];
+            logOutput.push(
+              `// Initial Array:\nconst fruits = ${JSON.stringify(
+                initialArray
+              )};\n`
+            );
+            const newArray = initialArray.slice(1, 4);
+            logOutput.push(`// After fruits.slice(1, 4):`);
+            logOutput.push(`Returned new array: ${JSON.stringify(newArray)}`);
+            logOutput.push(
+              `Original fruits array remains unchanged: ${JSON.stringify(
+                initialArray
+              )}`
+            );
+            return logOutput.join("\n");
+          },
+        },
+        {
+          name: "concat()",
+          category: "एक्सेसर",
+          description:
+            "इस ऐरे को अन्य ऐरे(ओं) और/या मान(ओं) के साथ जोड़कर एक नया ऐरे लौटाता है।",
+          syntax: "array.concat(value1, value2, ...)",
+          mutates: false,
+          example: () => {
+            let logOutput = [];
+            const arr1 = [1, 2];
+            const arr2 = [3, 4];
+            logOutput.push(`const arr1 = ${JSON.stringify(arr1)};`);
+            logOutput.push(`const arr2 = ${JSON.stringify(arr2)};\n`);
+            const newArray = arr1.concat(arr2, 5);
+            logOutput.push(`// After arr1.concat(arr2, 5):`);
+            logOutput.push(`Returned new array: ${JSON.stringify(newArray)}`);
+            logOutput.push(
+              `Original arr1 remains unchanged: ${JSON.stringify(arr1)}`
+            );
+            return logOutput.join("\n");
+          },
+        },
+        {
+          name: "join()",
+          category: "एक्सेसर",
+          description:
+            "एक ऐरे के सभी एलिमेंट्स को एक स्ट्रिंग में जोड़ता है और इस स्ट्रिंग को लौटाता है।",
+          syntax: "array.join(separator)",
+          mutates: false,
+          example: () => {
+            let logOutput = [];
+            const initialArray = ["Fire", "Air", "Water"];
+            logOutput.push(
+              `// Initial Array:\nconst elements = ${JSON.stringify(
+                initialArray
+              )};\n`
+            );
+            const resultString = initialArray.join(" - ");
+            logOutput.push(`// After elements.join(' - '):`);
+            logOutput.push(`Returned string: "${resultString}"`);
+            return logOutput.join("\n");
+          },
+        },
+        {
+          name: "includes()",
+          category: "एक्सेसर",
+          description:
+            "निर्धारित करता है कि क्या एक ऐरे में एक निश्चित एलिमेंट शामिल है, true या false लौटाता है।",
+          syntax: "array.includes(element, fromIndex)",
+          mutates: false,
+          example: () => {
+            let logOutput = [];
+            const initialArray = [1, 2, 3];
+            logOutput.push(
+              `// Initial Array:\nconst numbers = ${JSON.stringify(
+                initialArray
+              )};\n`
+            );
+            const hasTwo = initialArray.includes(2);
+            const hasFour = initialArray.includes(4);
+            logOutput.push(`numbers.includes(2) returns: ${hasTwo}`);
+            logOutput.push(`numbers.includes(4) returns: ${hasFour}`);
+            return logOutput.join("\n");
+          },
+        },
+        {
+          name: "indexOf()",
+          category: "एक्सेसर",
+          description:
+            "ऐरे में एक दिए गए एलिमेंट का पहला इंडेक्स लौटाता है, या -1 यदि वह मौजूद नहीं है।",
+          syntax: "array.indexOf(searchElement, fromIndex)",
+          mutates: false,
+          example: () => {
+            let logOutput = [];
+            const initialArray = ["ant", "bison", "camel", "duck", "bison"];
+            logOutput.push(
+              `// Initial Array:\nconst beasts = ${JSON.stringify(
+                initialArray
+              )};\n`
+            );
+            const firstBison = initialArray.indexOf("bison");
+            const firstGiraffe = initialArray.indexOf("giraffe");
+            logOutput.push(`beasts.indexOf('bison') returns: ${firstBison}`);
+            logOutput.push(
+              `beasts.indexOf('giraffe') returns: ${firstGiraffe}`
+            );
+            return logOutput.join("\n");
+          },
+        },
+        {
+          name: "toString()",
+          category: "एक्सेसर",
+          description:
+            "निर्दिष्ट ऐरे और उसके एलिमेंट्स का प्रतिनिधित्व करने वाली एक स्ट्रिंग लौटाता है।",
+          syntax: "array.toString()",
+          mutates: false,
+          example: () => {
+            let logOutput = [];
+            const initialArray = [1, 2, "a", "b"];
+            logOutput.push(
+              `// Initial Array:\nconst arr = ${JSON.stringify(
+                initialArray
+              )};\n`
+            );
+            const str = initialArray.toString();
+            logOutput.push(`// After arr.toString():`);
+            logOutput.push(`Returned string: "${str}"`);
+            return logOutput.join("\n");
+          },
+        },
+        {
+          name: "toLocaleString()",
+          category: "एक्सेसर",
+          description:
+            "ऐरे के एलिमेंट्स का प्रतिनिधित्व करने वाली एक स्ट्रिंग लौटाता है। एलिमेंट्स को उनके toLocaleString तरीकों का उपयोग करके स्ट्रिंग में परिवर्तित किया जाता है।",
+          syntax: "array.toLocaleString()",
+          mutates: false,
+          example: () => {
+            let logOutput = [];
+            const initialArray = [1, 1000, new Date("2023-01-01")];
+            logOutput.push(
+              `// Initial Array:\nconst arr = [1, 1000, new Date('2023-01-01')];\n`
+            );
+            const localeStr = initialArray.toLocaleString("en-US");
+            logOutput.push(`// After arr.toLocaleString('en-US'):`);
+            logOutput.push(`Returned string: "${localeStr}"`);
+            return logOutput.join("\n");
+          },
+        },
+        {
+          name: "lastIndexOf()",
+          category: "एक्सेसर",
+          description:
+            "ऐरे में एक दिए गए एलिमेंट का अंतिम इंडेक्स लौटाता है, या -1 यदि वह मौजूद नहीं है। ऐरे को पीछे की ओर खोजा जाता है।",
+          syntax: "array.lastIndexOf(searchElement, fromIndex)",
+          mutates: false,
+          example: () => {
+            let logOutput = [];
+            const initialArray = ["a", "b", "c", "a", "b"];
+            logOutput.push(
+              `// Initial Array:\nconst letters = ${JSON.stringify(
+                initialArray
+              )};\n`
+            );
+            const lastA = initialArray.lastIndexOf("a");
+            const lastB = initialArray.lastIndexOf("b", 3);
+            logOutput.push(`letters.lastIndexOf('a') returns: ${lastA}`);
+            logOutput.push(`letters.lastIndexOf('b', 3) returns: ${lastB}`);
+            return logOutput.join("\n");
+          },
+        },
+        {
+          name: "forEach()",
+          category: "इटेरेशन",
+          description:
+            "हर ऐरे एलिमेंट के लिए एक बार एक प्रदान किए गए फ़ंक्शन को निष्पादित करता है।",
+          syntax: "array.forEach(callback(currentValue, index, array))",
+          mutates: false,
+          example: () => {
+            let logOutput = [];
+            const initialArray = ["a", "b", "c"];
+            logOutput.push(
+              `// Initial Array:\nconst letters = ${JSON.stringify(
+                initialArray
+              )};\n`
+            );
+            logOutput.push(`// Executing letters.forEach():`);
+            initialArray.forEach((element, index) => {
+              logOutput.push(`  - Element at index ${index}: ${element}`);
+            });
+            return logOutput.join("\n");
+          },
+        },
+        {
+          name: "map()",
+          category: "इटेरेशन",
+          description:
+            "कॉलिंग ऐरे में हर एलिमेंट पर एक प्रदान किए गए फ़ंक्शन को कॉल करने के परिणामों के साथ एक नया ऐरे बनाता है।",
+          syntax: "array.map(callback(currentValue, index, array))",
+          mutates: false,
+          example: () => {
+            let logOutput = [];
+            const initialArray = [1, 4, 9];
+            logOutput.push(
+              `// Initial Array:\nconst numbers = ${JSON.stringify(
+                initialArray
+              )};\n`
+            );
+            const roots = initialArray.map(Math.sqrt);
+            logOutput.push(`// After numbers.map(Math.sqrt):`);
+            logOutput.push(`Returned new array: ${JSON.stringify(roots)}`);
+            logOutput.push(
+              `Original array unchanged: ${JSON.stringify(initialArray)}`
+            );
+            return logOutput.join("\n");
+          },
+        },
+        {
+          name: "filter()",
+          category: "इटेरेशन",
+          description:
+            "एक नया ऐरे बनाता है जिसमें सभी एलिमेंट्स होते हैं जो प्रदान किए गए फ़ंक्शन द्वारा लागू किए गए परीक्षण को पास करते हैं।",
+          syntax: "array.filter(callback(element, index, array))",
+          mutates: false,
+          example: () => {
+            let logOutput = [];
+            const initialArray = [
+              "spray",
+              "limit",
+              "elite",
+              "exuberant",
+              "destruction",
+              "present",
+            ];
+            logOutput.push(`// Initial Array of words...\n`);
+            const longWords = initialArray.filter((word) => word.length > 6);
+            logOutput.push(`// After filtering for words with length > 6:`);
+            logOutput.push(`Returned new array: ${JSON.stringify(longWords)}`);
+            return logOutput.join("\n");
+          },
+        },
+        {
+          name: "reduce()",
+          category: "इटेरेशन",
+          description:
+            "ऐरे के प्रत्येक एलिमेंट पर एक रिड्यूसर फ़ंक्शन को निष्पादित करता है, जिसके परिणामस्वरूप एक एकल आउटपुट मान होता है।",
+          syntax: "array.reduce(callback(acc, val, idx, arr), initialValue)",
+          mutates: false,
+          example: () => {
+            let logOutput = [];
+            const initialArray = [1, 2, 3, 4];
+            logOutput.push(
+              `// Initial Array:\nconst numbers = ${JSON.stringify(
+                initialArray
+              )};\n`
+            );
+            const sum = initialArray.reduce(
+              (accumulator, currentValue) => accumulator + currentValue,
+              0
+            );
+            logOutput.push(`// After reducing to find the sum:`);
+            logOutput.push(`Returned single value: ${sum}`);
+            return logOutput.join("\n");
+          },
+        },
+        {
+          name: "find()",
+          category: "इटेरेशन",
+          description:
+            "प्रदान किए गए परीक्षण फ़ंक्शन को संतुष्ट करने वाले पहले एलिमेंट का मान लौटाता है। अन्यथा undefined लौटाता है।",
+          syntax: "array.find(callback(element, index, array))",
+          mutates: false,
+          example: () => {
+            let logOutput = [];
+            const initialArray = [5, 12, 8, 130, 44];
+            logOutput.push(
+              `// Initial Array:\nconst numbers = ${JSON.stringify(
+                initialArray
+              )};\n`
+            );
+            const found = initialArray.find((element) => element > 10);
+            logOutput.push(`// After finding the first element > 10:`);
+            logOutput.push(`Returned value: ${found}`);
+            return logOutput.join("\n");
+          },
+        },
+        {
+          name: "findIndex()",
+          category: "इटेरेशन",
+          description:
+            "प्रदान किए गए परीक्षण फ़ंक्शन को संतुष्ट करने वाले ऐरे में पहले एलिमेंट का इंडेक्स लौटाता है। अन्यथा, यह -1 लौटाता है।",
+          syntax: "array.findIndex(callback(element, index, array))",
+          mutates: false,
+          example: () => {
+            let logOutput = [];
+            const initialArray = [5, 12, 8, 130, 44];
+            logOutput.push(
+              `// Initial Array:\nconst numbers = ${JSON.stringify(
+                initialArray
+              )};\n`
+            );
+            const index = initialArray.findIndex((element) => element > 10);
+            logOutput.push(
+              `// After finding the index of the first element > 10:`
+            );
+            logOutput.push(`Returned index: ${index}`);
+            return logOutput.join("\n");
+          },
+        },
+        {
+          name: "some()",
+          category: "इटेरेशन",
+          description:
+            "यह जाँचता है कि क्या ऐरे में कम से कम एक एलिमेंट प्रदान किए गए फ़ंक्शन द्वारा लागू किए गए परीक्षण को पास करता है।",
+          syntax: "array.some(callback(element, index, array))",
+          mutates: false,
+          example: () => {
+            let logOutput = [];
+            const initialArray = [1, 2, 3, 4, 5];
+            logOutput.push(
+              `// Initial Array:\nconst numbers = ${JSON.stringify(
+                initialArray
+              )};\n`
+            );
+            const hasEven = initialArray.some((element) => element % 2 === 0);
+            const hasNegative = initialArray.some((element) => element < 0);
+            logOutput.push(`// Check if some element is even:`);
+            logOutput.push(`Returns: ${hasEven}`);
+            logOutput.push(`// Check if some element is negative:`);
+            logOutput.push(`Returns: ${hasNegative}`);
+            return logOutput.join("\n");
+          },
+        },
+        {
+          name: "every()",
+          category: "इटेरेशन",
+          description:
+            "यह जाँचता है कि क्या ऐरे में सभी एलिमेंट्स प्रदान किए गए फ़ंक्शन द्वारा लागू किए गए परीक्षण को पास करते हैं।",
+          syntax: "array.every(callback(element, index, array))",
+          mutates: false,
+          example: () => {
+            let logOutput = [];
+            const initialArray = [1, 30, 39, 29, 10, 13];
+            logOutput.push(
+              `// Initial Array:\nconst numbers = ${JSON.stringify(
+                initialArray
+              )};\n`
+            );
+            const allBelow40 = initialArray.every(
+              (currentValue) => currentValue < 40
+            );
+            const allBelow20 = initialArray.every(
+              (currentValue) => currentValue < 20
+            );
+            logOutput.push(`// Check if every element is below 40:`);
+            logOutput.push(`Returns: ${allBelow40}`);
+            logOutput.push(`// Check if every element is below 20:`);
+            logOutput.push(`Returns: ${allBelow20}`);
+            return logOutput.join("\n");
+          },
+        },
+        {
+          name: "flat()",
+          category: "इटेरेशन",
+          description:
+            "निर्दिष्ट गहराई तक सभी सब-ऐरे एलिमेंट्स के साथ एक नया ऐरे बनाता है।",
+          syntax: "array.flat(depth)",
+          mutates: false,
+          example: () => {
+            let logOutput = [];
+            const initialArray = [1, [2, 3], [4, [5, 6]]];
+            logOutput.push(
+              `// Initial Array:\nconst numbers = ${JSON.stringify(
+                initialArray
+              )};\n`
+            );
+            const flattened = initialArray.flat(2);
+            logOutput.push(`// After numbers.flat(2):`);
+            logOutput.push(`Returned new array: ${JSON.stringify(flattened)}`);
+            return logOutput.join("\n");
+          },
+        },
+        {
+          name: "flatMap()",
+          category: "इटेरेशन",
+          description:
+            "पहले प्रत्येक एलिमेंट को एक मैपिंग फ़ंक्शन का उपयोग करके मैप करता है, फिर परिणाम को एक नए ऐरे में फ़्लैट करता है।",
+          syntax: "array.flatMap(callback(currentValue, index, array))",
+          mutates: false,
+          example: () => {
+            let logOutput = [];
+            const initialArray = [1, 2, 3, 4];
+            logOutput.push(
+              `// Initial Array:\nconst numbers = ${JSON.stringify(
+                initialArray
+              )};\n`
+            );
+            const flatMapped = initialArray.flatMap((x) => [x, x * 2]);
+            logOutput.push(`// After numbers.flatMap(x => [x, x * 2]):`);
+            logOutput.push(`Returned new array: ${JSON.stringify(flatMapped)}`);
+            return logOutput.join("\n");
+          },
+        },
+        {
+          name: "keys()",
+          category: "इटेरेशन",
+          description:
+            "एक नया ऐरे इटेरेटर ऑब्जेक्ट लौटाता है जिसमें ऐरे में प्रत्येक इंडेक्स के लिए कीज़ होती हैं।",
+          syntax: "array.keys()",
+          mutates: false,
+          example: () => {
+            let logOutput = [];
+            const initialArray = ["a", "b", "c"];
+            logOutput.push(
+              `// Initial Array:\nconst letters = ${JSON.stringify(
+                initialArray
+              )};\n`
+            );
+            const iterator = initialArray.keys();
+            logOutput.push(
+              `// Iterating over the iterator returned by letters.keys():`
+            );
+            for (let key of iterator) {
+              logOutput.push(`  - Key: ${key}`);
+            }
+            return logOutput.join("\n");
+          },
+        },
+        {
+          name: "values()",
+          category: "इटेरेशन",
+          description:
+            "एक नया ऐरे इटेरेटर ऑब्जेक्ट लौटाता है जिसमें ऐरे में प्रत्येक इंडेक्स के लिए मान होते हैं।",
+          syntax: "array.values()",
+          mutates: false,
+          example: () => {
+            let logOutput = [];
+            const initialArray = ["a", "b", "c"];
+            logOutput.push(
+              `// Initial Array:\nconst letters = ${JSON.stringify(
+                initialArray
+              )};\n`
+            );
+            const iterator = initialArray.values();
+            logOutput.push(
+              `// Iterating over the iterator returned by letters.values():`
+            );
+            for (let value of iterator) {
+              logOutput.push(`  - Value: ${value}`);
+            }
+            return logOutput.join("\n");
+          },
+        },
+        {
+          name: "entries()",
+          category: "इटेरेशन",
+          description:
+            "एक नया ऐरे इटेरेटर ऑब्जेक्ट लौटाता है जिसमें ऐरे में प्रत्येक इंडेक्स के लिए की/वैल्यू जोड़ी होती है।",
+          syntax: "array.entries()",
+          mutates: false,
+          example: () => {
+            let logOutput = [];
+            const initialArray = ["a", "b", "c"];
+            logOutput.push(
+              `// Initial Array:\nconst letters = ${JSON.stringify(
+                initialArray
+              )};\n`
+            );
+            const iterator = initialArray.entries();
+            logOutput.push(
+              `// Iterating over the iterator returned by letters.entries():`
+            );
+            for (let entry of iterator) {
+              logOutput.push(`  - Entry: [${entry[0]}, '${entry[1]}']`);
+            }
+            return logOutput.join("\n");
+          },
+        },
+        {
+          name: "Array.from()",
+          category: "स्टैटिक",
+          description:
+            "एक ऐरे-जैसे या इटेरेबल ऑब्जेक्ट से एक नया, उथली-कॉपी किया गया ऐरे इंस्टेंस बनाता है।",
+          syntax: "Array.from(arrayLike, mapFn, thisArg)",
+          mutates: false,
+          example: () => {
+            let logOutput = [];
+            logOutput.push(`// Creating an array from a string:`);
+            const str = "hello";
+            const newArr = Array.from(str);
+            logOutput.push(
+              `Array.from('${str}') returns: ${JSON.stringify(newArr)}`
+            );
+            logOutput.push(`\n// Creating an array and mapping values:`);
+            const numbers = Array.from({ length: 5 }, (v, i) => i + 1);
+            logOutput.push(
+              `Array.from({length: 5}, (v, i) => i + 1) returns: ${JSON.stringify(
+                numbers
+              )}`
+            );
+            return logOutput.join("\n");
+          },
+        },
+        {
+          name: "Array.of()",
+          category: "स्टैटिक",
+          description:
+            "आर्गुमेंट्स की संख्या या प्रकार की परवाह किए बिना, एक वेरिएबल संख्या में आर्गुमेंट्स के साथ एक नया ऐरे इंस्टेंस बनाता है।",
+          syntax: "Array.of(element1, ..., elementN)",
+          mutates: false,
+          example: () => {
+            let logOutput = [];
+            const newArr = Array.of(1, 2, "three", true);
+            logOutput.push(`// Creating a new array with various elements:`);
+            logOutput.push(
+              `Array.of(1, 2, 'three', true) returns: ${JSON.stringify(newArr)}`
+            );
+            return logOutput.join("\n");
+          },
+        },
+        {
+          name: "Array.isArray()",
+          category: "स्टैटिक",
+          description: "निर्धारित करता है कि क्या पास किया गया मान एक ऐरे है।",
+          syntax: "Array.isArray(value)",
+          mutates: false,
+          example: () => {
+            let logOutput = [];
+            const arr = [1, 2, 3];
+            const obj = {};
+            logOutput.push(`// Checking different values:`);
+            logOutput.push(
+              `Array.isArray([1, 2, 3]) returns: ${Array.isArray(arr)}`
+            );
+            logOutput.push(`Array.isArray({}) returns: ${Array.isArray(obj)}`);
+            return logOutput.join("\n");
+          },
+        },
+      ];
+
+      let currentMethod = arrayMethodsData[0];
+      const navContainer = document.getElementById("methodsNav");
+      const detailsContainer = document.getElementById("methodDetails");
+      const exampleContainer = document.getElementById("interactiveExample");
+      const searchInput = document.getElementById("searchInput");
+
+      function displayMethod(method) {
+        currentMethod = method;
+
+        const mutatesBadge = method.mutates
+          ? '<span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">मूल ऐरे को बदलता है</span>'
+          : '<span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">नया मान/ऐरे लौटाता है</span>';
+
+        detailsContainer.innerHTML = `
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-3xl font-bold text-indigo-800 font-fira-code">${method.name}</h2>
+                    ${mutatesBadge}
+                </div>
+                <p class="text-slate-600 mb-6">${method.description}</p>
+                <h3 class="font-semibold text-lg mb-2 text-slate-700">सिंटैक्स</h3>
+                <div class="code-block p-4 rounded-lg">
+                    <code class="font-fira-code text-sky-900">${method.syntax}</code>
+                </div>
+            `;
+
+        const exampleCodeText = method.example
+          .toString()
+          .replace(/^() => \{/, "")
+          .replace(/\}$/, "")
+          .replace(/let logOutput = \[\];/, "")
+          .replace(/logOutput\.push\((`|'|")/g, "")
+          .replace(/(`|'|")\);/g, "")
+          .replace(/\\n/g, "\n")
+          .replace(/\\'/g, "'")
+          .trim();
+
+        exampleContainer.innerHTML = `
+                <div class="flex-grow flex flex-col">
+                    <h3 class="font-semibold text-lg mb-2 text-slate-700">इंटरैक्टिव उदाहरण</h3>
+                    <div class="code-block p-4 rounded-lg text-sm flex-grow">
+                        <pre class="font-fira-code text-slate-800">${exampleCodeText}</pre>
+                    </div>
+                    <button id="runButton" class="mt-6 w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition duration-300 transform hover:scale-105 active:scale-100 shadow-lg">
+                        ▶ उदाहरण चलाएँ
+                    </button>
+                    <h3 class="font-semibold text-lg mt-8 mb-2 text-slate-700">कंसोल आउटपुट</h3>
+                    <div id="consoleOutput" class="console-output text-sm">आउटपुट देखने के लिए 'उदाहरण चलाएँ' पर क्लिक करें।</div>
+                </div>
+            `;
+
+        document.getElementById("runButton").addEventListener("click", () => {
+          const output = method.example();
+          document.getElementById("consoleOutput").textContent = output;
+        });
+
+        updateActiveNavItem();
+      }
+
+      function populateNav(filter = "") {
+        const groupedMethods = arrayMethodsData.reduce((acc, method) => {
+          if (method.name.toLowerCase().includes(filter.toLowerCase())) {
+            (acc[method.category] = acc[method.category] || []).push(method);
+          }
+          return acc;
+        }, {});
+
+        navContainer.innerHTML = Object.entries(groupedMethods)
+          .map(
+            ([category, methods]) => `
+                <h3 class="text-lg font-semibold text-slate-500 mt-4 mb-2 first:mt-0">${category} मेथड्स</h3>
+                <ul class="space-y-1">
+                    ${methods
+                      .map(
+                        (method) => `
+                        <li>
+                            <a href="#" class="block px-4 py-2 rounded-lg transition duration-150 ease-in-out hover:bg-blue-50 text-slate-700 font-fira-code" data-method="${method.name}">${method.name}</a>
+                        </li>
+                    `
+                      )
+                      .join("")}
+                </ul>
+            `
+          )
+          .join("");
+
+        updateActiveNavItem();
+      }
+
+      function updateActiveNavItem() {
+        document.querySelectorAll("#methodsNav a").forEach((a) => {
+          a.classList.remove("sidebar-item-active");
+          if (a.dataset.method === currentMethod.name) {
+            a.classList.add("sidebar-item-active");
+          }
+        });
+      }
+
+      navContainer.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (e.target.tagName === "A") {
+          const methodName = e.target.dataset.method;
+          const method = arrayMethodsData.find((m) => m.name === methodName);
+          if (method) displayMethod(method);
+        }
+      });
+
+      searchInput.addEventListener("keyup", (e) => {
+        populateNav(e.target.value);
+      });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        populateNav();
+        displayMethod(arrayMethodsData[0]);
+      });
+    </script>
+  </body>
+</html>
