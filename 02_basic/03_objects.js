@@ -1,4 +1,7 @@
-// singleton object
+// Objects in JavaScript
+// Objects are collections of key-value pairs
+// Keys are strings (or Symbols) and values can be any data type
+
 const mySyn = Symbol("mySyn");
 let user = {
   [mySyn]: "secret",
