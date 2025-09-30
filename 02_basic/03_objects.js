@@ -57,3 +57,9 @@ let car = {
 // };
 // user.greet(); // Output: Hello, my name is ram pravesh kumar
 // console.log(user.greet()) // Output: undefined because the greet method does not return anything
+// console.log(user); // Output: { name: 'John', age: 30, email: 'ram@example.com', greet: [Function: greet] }
+
+// delete user.greet;
+// console.log(user); // Output: { name: 'John', age: 30, email: 'ram@example.com' }
+
+//
