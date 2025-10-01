@@ -35,13 +35,13 @@ let mergedObj2 = { ...obj1, ...obj2 };
 
 //Object.create and more methods
 let animal = {
-  eats: true,   
+  eats: true,
 };
 let dog = Object.create(animal);
-// console.log(dog.eats); // true   
+// console.log(dog.eats); // true
 dog.barks = true;
 // console.log(dog.barks); // true
-// console.log(dog); // {}  
+// console.log(dog); // {}
 // console.log(dog.__proto__); // { eats: true }
 // console.log(Object.getPrototypeOf(dog)); // { eats: true }
 // console.log(dog.hasOwnProperty("barks")); // true
@@ -53,3 +53,14 @@ dog.barks = true;
 // console.log(Object.entries(animal)); // [ [ 'eats', true ] ]
 // console.log(Object.getOwnPropertyNames(dog)); // [ 'barks' ]
 // console.log(Object.getOwnPropertyDescriptors(dog)); // { barks: { value: true, writable: true, enumerable: true, configurable: true } }
+
+const course = {
+  coursename: "js in hindi",
+  price: 999,
+  courseInstructor: "hitesh",
+};
+const { courseInstructor: instructor, price } = course;
+// console.log(instructor);
+// console.log(price);
+
+
