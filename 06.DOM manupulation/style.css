@@ -7,3 +7,16 @@ h1 {
   background: #d12020;
   font-size: 50px;
 }
+
+#hello {
+  height: 100px;
+  width: 100px;
+  background-color: aliceblue;
+  border: 4px, rgb(76, 184, 142), solid;
+  /* border-radius: 50%; */
+}
+
+.button {
+  margin-top: 10px;
+  width: 50px;
+}
