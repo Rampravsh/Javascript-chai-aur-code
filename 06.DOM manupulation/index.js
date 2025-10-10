@@ -36,14 +36,14 @@
 
 // hello.innerHTML = "hai to yaha ";
 
-let on = document.querySelector("#on");
-let off = document.querySelector("#off");
-let hello = document.querySelector("#hello");
-on.addEventListener("click", () => {
-  hello.style.backgroundColor = "yellow";
-  console.log("click");
-});
-off.addEventListener("click", () => {
-  hello.style.backgroundColor = "black";
-  console.log("click");
-});
+// let on = document.querySelector("#on");
+// let off = document.querySelector("#off");
+// let hello = document.querySelector("#hello");
+// on.addEventListener("click", () => {
+//   hello.style.backgroundColor = "yellow";
+//   console.log("click");
+// });
+// off.addEventListener("click", () => {
+//   hello.style.backgroundColor = "black";
+//   console.log("click");
+// });
