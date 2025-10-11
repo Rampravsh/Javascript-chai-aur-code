@@ -2,3 +2,11 @@ body {
   background-color: black;
   color: aliceblue;
 }
+div {
+  background-color: red;
+  padding: 5px;
+}
+p {
+  border: 4px, solid, rgb(248, 243, 243);
+  padding: 3px;
+}
