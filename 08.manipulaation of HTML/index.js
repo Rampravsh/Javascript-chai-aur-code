@@ -1,6 +1,6 @@
 // console.log('hello world');
 
-// let h1 = document.querySelector("h1");
+// let h1 = document.querybutton("h1");
 // console.log(h1);
 // console.log(h1.tagName);
 // console.log(h1.nodeName);
@@ -27,5 +27,29 @@ let p = document.createElement("p");
 // div.innerHTML = "<p>child</p>";
 p.innerText = "para 4";
 
-div.after(p);
-div.before(p);
+// div.after(p);
+// div.before(p);
+// div.remove();
+
+// const para2 = document.querySelector("#para2");
+
+// const parent = para2.parentNode;
+// parent.remove();
+
+const btn = document.querySelectorAll("button");
+
+// console.log(btn);
+// const parent = btn.parentNode;
+// console.log(parent);
+// btn.forEach((button) => {
+//   button.addEventListener("click", () => {
+//     button.parentElement.remove();
+//   });
+// });
+// const newButton = document.createElement("button");
+// newButton.innerText = "New Button";
+// div.appendChild(newButton);
+// newButton.addEventListener("click", () => {
+//   alert("New button clicked!");
+//   div.appendChild(p);
+// });
