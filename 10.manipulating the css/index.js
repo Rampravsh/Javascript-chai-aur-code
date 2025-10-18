@@ -1,4 +1,4 @@
-// Example 1: Changing the style of an element directly
+/* // Example 1: Changing the style of an element directly
 const title = document.getElementById("title");
 const paragraph = document.getElementById("paragraph");
 
@@ -38,8 +38,9 @@ const toggleClassButton = document.getElementById("toggleClassButton");
 toggleClassButton.addEventListener("click", () => {
   // Toggle the 'highlight' class on the paragraph
   paragraph.classList.toggle("highlight");
-});
+}); */
 
-let div = document.querySelector("div");
+/* let div = document.querySelector("div");
 div.classList.add("box1");
 console.log(div.classList);
+ */
