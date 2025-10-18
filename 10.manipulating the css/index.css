@@ -1,0 +1,16 @@
+body {
+  font-family: sans-serif;
+}
+
+.highlight {
+  background-color: yellow;
+  border: 2px solid orange;
+}
+
+.box1 {
+  width: 150px;
+  height: 150px;
+  background-color: lightblue;
+  border: 3px dashed blue;
+  margin: 10px;
+}
