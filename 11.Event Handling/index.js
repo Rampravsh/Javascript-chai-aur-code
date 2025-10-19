@@ -78,3 +78,35 @@ button.addEventListener("mouseleave", () => console.log("mouseleave")); */
     console.log("helo");
   }
 }); */
+
+// project 1
+
+/* const incBtn = document.querySelector(".incBtn");
+const decBtn = document.querySelector(".decBtn");
+const counterValue = document.querySelector(".counterValue");
+incBtn.addEventListener("click", () => {
+  counterValue.innerText = Number(counterValue.innerText) + 1;
+});
+decBtn.addEventListener("click", () => {
+  counterValue.innerText = Number(counterValue.innerText) - 1;
+});
+ */
+
+// project 2
+/* let form = document.querySelector("form");
+let body = document.querySelector("body");
+let nameInput = document.querySelector("#name");
+let emailInput = document.querySelector("#email");
+let submitBtn = document.querySelector(".submitBtn");
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  if (!nameInput.value || !emailInput.value) {
+    return;
+  }
+  const p = document.createElement("p");
+  p.textContent = `Name: ${nameInput.value}, Email: ${emailInput.value}`;
+  body.append(p);
+  nameInput.value = "";
+  emailInput.value = "";
+}); */
