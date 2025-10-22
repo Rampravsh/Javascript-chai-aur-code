@@ -170,12 +170,23 @@ console.log(str); */
 
 //6️⃣ REUSE OR COMPOSE LOGIC
 // Build small reusable function and compose them together
-const toLower = (str) => str.toLowerCase();
+/* const toLower = (str) => str.toLowerCase();
 const removeSpaces = (str) => str.replaceAll(" ", "");
 const atTheRate = (str) => "@" + str;
 let str = "Rampravesh kumar ";
 let result = atTheRate(removeSpaces(toLower(str)));
-console.log(result);
+console.log(result); */
 
 //7️⃣ DON'T ITERATE ( IMPERATIVELY )
 // Avoid for while , etc Use map, filter, reduce.
+
+//❌Imperative Style****
+/* let evens = [];
+for (let n of [1, 2, 3, 4, 5]) {
+  if (n % 2 === 0) evens.push(n);
+}
+console.log(evens); */
+
+//✅ FP (Declarative) Style ********
+/* const evens = [1, 2, 3, 4, 5].filter((n) => n % 2 === 0);
+console.log(evens); */
