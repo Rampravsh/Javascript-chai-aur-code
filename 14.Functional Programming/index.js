@@ -176,3 +176,6 @@ const atTheRate = (str) => "@" + str;
 let str = "Rampravesh kumar ";
 let result = atTheRate(removeSpaces(toLower(str)));
 console.log(result);
+
+//7️⃣ DON'T ITERATE ( IMPERATIVELY )
+// Avoid for while , etc Use map, filter, reduce.
