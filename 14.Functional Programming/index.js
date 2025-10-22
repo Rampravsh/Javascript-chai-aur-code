@@ -190,3 +190,71 @@ console.log(evens); */
 //✅ FP (Declarative) Style ********
 /* const evens = [1, 2, 3, 4, 5].filter((n) => n % 2 === 0);
 console.log(evens); */
+
+// 8️⃣ LOOSE COUPLING
+//Coupling refers to how dependent one piece of code is on another.
+//Loose coupling means less dependent , Keep functions and modules independent
+
+/* //❌Tightly Coupled ******
+function getUserData() {
+  return fetch("https://api.example.com/user").then((res) => res.json());
+}
+
+//✅ Loosely Coupled****
+function getData(api) {
+  return fetch(api).then((res) => res.json());
+} */
+
+// --- Detailed Example of Loose Coupling ---
+
+/* // A pure function that takes a user object and returns their name.
+// It doesn't know or care where the user object comes from.
+const getName = (user) => user.name;
+
+// A pure function that takes a name and creates a greeting.
+// It doesn't know or care how the name was generated.
+const createGreeting = (name) => `Hello, ${name}`;
+
+// Another function that could come from anywhere (e.g., an API call)
+const fetchUser = () => {
+  // In a real app, this might fetch from a server.
+  return { id: 1, name: "Alice", email: "alice@example.com" };
+};
+
+
+// --- Composition ---
+// We can compose these functions together. Each function is a separate,
+// independent step in the process.
+
+const user = fetchUser();
+const userName = getName(user);
+const greeting = createGreeting(userName);
+
+console.log(greeting); // Output: Hello, Alice!
+
+
+// --- Benefits of Loose Coupling ---
+
+// 1. Reusability: We can reuse `createGreeting` for any name.
+const greetingForBob = createGreeting("Bob");
+console.log(greetingForBob); // Output: Hello, Bob!
+
+// 2. Testability: We can test each function in isolation.
+console.log("Testing getName:", getName({ name: "Test User" }) === "Test User");
+console.log("Testing createGreeting:", createGreeting("Test") === "Hello, Test!");
+
+// 3. Maintainability: If we need to change how we get the user's name
+// (e.g., the property changes from 'name' to 'fullName'), we only need to
+// update one small function (`getName`), and the rest of the system
+// (`createGreeting`) remains unaffected.
+
+const getFullName = (user) => user.fullName;
+
+const userWithFullName = { id: 2, fullName: "Charlie Brown" };
+
+const newGreeting = createGreeting(getFullName(userWithFullName));
+console.log(newGreeting); // Output: Hello, Charlie Brown!
+ */
+
+
+
