@@ -15,13 +15,13 @@ for (let index = 0; index < arr.length; index++) {
 }
 console.log(double); */
 
-//✅ declarative Programming
+//✅ 1️⃣ declarative Programming
 
 /* let arr = [1, 2, 4, 5, 3, 5, 6];
 let double = arr.map((element) => element * 2);
 console.log(double); */
 
-/* // ✅ PURE FUNCTIONS*********
+/* //2️⃣ ✅ PURE FUNCTIONS*********
 function sum(a, b) {
   return a + b;
 }
@@ -36,7 +36,7 @@ function sum(a, b) {
 let impureFunResult = sum(2, 4);
 console.log(impureFunResult); */
 
-// ✅IMMUATABILITY *******
+// 3️⃣IMMUATABILITY *******
 //do not modify existing data instead, return new copies
 
 //❌ Mutable ******
@@ -125,19 +125,54 @@ const personWithNewCity = {
 console.log("After updating a nested property:", personWithNewCity);
 console.log("Original object remains unchanged:", person); */
 
-//AVOID SHARED STATE
+//4️⃣AVOID SHARED STATE
 //Shared mutable state can lead to bugs , especially in async or parallel systems.
 
-// ❌ Shared State (Bad 👎🙅‍♂️)*****
+/* // ❌ Shared State (Bad 👎🙅‍♂️)*****
 let total = 0;
 function addToTotal(n) {
   return (total += n);
 }
-console.log(addToTotal(5));
+console.log(addToTotal(5)); */
 
-// ✅ avoid shared state ****
+/* // ✅ avoid shared state ****
 function add(a, b) {
   return a + b;
 }
 
-console.log(add(4, 5));
+console.log(add(4, 5)); */
+
+// 5️⃣AVOID SIDE EFFECT
+// side effects are anything a function does outside its scope
+//(API call,DOM update , modifying global vars)
+
+/* //❌ Side Effect *******
+function logMessage(msg) {
+  console.log(msg); //side effect : interacts with console
+}
+
+//✅No side Effect *****
+function getGreeting(name) {
+  return `Hello,${name}`;
+}
+
+//✅No side Effect *****
+function toCaptlize(str) {
+  let newStr = str[0].toUpperCase() + str.slice(1);
+  return newStr;
+}
+let str = "rampravesh kumar";
+let newStr = toCaptlize(str);
+console.log(newStr);
+console.log(str);
+
+console.log(str); */
+
+//6️⃣ REUSE OR COMPOSE LOGIC
+// Build small reusable function and compose them together
+const toLower = (str) => str.toLowerCase();
+const removeSpaces = (str) => str.replaceAll(" ", "");
+const atTheRate = (str) => "@" + str;
+let str = "Rampravesh kumar ";
+let result = atTheRate(removeSpaces(toLower(str)));
+console.log(result);
