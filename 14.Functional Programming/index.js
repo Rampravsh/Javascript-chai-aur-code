@@ -256,5 +256,13 @@ const newGreeting = createGreeting(getFullName(userWithFullName));
 console.log(newGreeting); // Output: Hello, Charlie Brown!
  */
 
+//9️⃣ FIRST-CLASS & HIGHER ORDER FUNCTIONS
+// First-Class :Function can be stoted in varibles, passed ,and returned
+//Higher Order :Function that take other functions as arguments or return them
 
+/* const greet = () => "hello";
+const callWithName = (fn) => (name) => `${fn()} ${name}`;
+const greetUser = callWithName(greet);
+console.log(greetUser("rampravesh"));
 
+console.log(greetUser); */
