@@ -6,10 +6,13 @@ This project is part of the "Chai aur Code" JavaScript series, focusing on under
 
 The `index.js` file contains various examples and experiments with the JavaScript `Date` object. This includes:
 
-- Creating new `Date` objects.
-- Getting different parts of a date (year, month, day, etc.).
-- Formatting dates into strings.
-- Working with timestamps.
+- **Creating `Date` Objects**: Demonstrates various ways to instantiate a `Date`.
+- **Static Methods**: Shows usage of `Date.now()` and `Date.parse()`.
+- **Getter Methods**: Examples of `getFullYear()`, `getMonth()`, `getDate()`, `getHours()`, etc.
+- **Setter Methods**: Examples of `setFullYear()`, `setMonth()`, `setDate()`, etc.
+- **Formatting Methods**: Covers `toString()`, `toDateString()`, `toISOString()`, and more.
+- **Locale-Specific Formatting**: Explores `toLocaleString()` for customized, human-readable date and time output.
+- **Timestamps**: Working with milliseconds since the UNIX epoch.
 
 ## How to Use
 
@@ -20,6 +23,6 @@ The `index.js` file contains various examples and experiments with the JavaScrip
 ## Learning Objectives
 
 - Understand how to instantiate `Date` objects.
-- Learn about the various `get` and `set` methods.
-- Explore different ways to represent dates and times.
-- Customize date and time formatting for locale-specific output using `toLocaleString()`.
+- Learn about the various `get`, `set`, and formatting methods.
+- Differentiate between local time and UTC methods.
+- Customize date and time formatting for locale-specific output using `toLocaleString()` and its options.
