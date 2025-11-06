@@ -10,4 +10,5 @@ let personDetaols = ["riy", 10, "bihar"];
 
 //create array using array constructor:
 let arr = new Array("spiderman", "ironman", "thor");
- 
+console.log(arr);
+console.log(colors) 
