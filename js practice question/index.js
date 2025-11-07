@@ -20,5 +20,16 @@ console.log(newArr) */
 
 //3️⃣ Generate a random integer between 0 to 18
 
-let randomInt = Math.floor(Math.random() * 18 + 1);
-console.log(randomInt);
+/* let randomInt = Math.floor(Math.random() * 18 + 1);
+console.log(randomInt); */
+
+//4️⃣ Create a function that takes an array containing both numbers and strings, and
+// returns a new arrays containing only the string values.
+
+let arr = [1, 2, 3, "a", 2, "f", "ram"];
+
+const returnString = (array) => {
+  return array.filter((element) => typeof element === "string");
+};
+
+console.log(returnString(arr));
