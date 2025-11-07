@@ -1,88 +1,101 @@
-// console.log("Script Start");
+// console.log("1st task");
+// setTimeout(() => {
+//   console.log(
+//     "2nd gdskfgkdfjgkldjflgkjd;lkfjgkdfjglkjdfklgjd;fkljgkldsjgkdfjgkdfjtask"
+//   );
+// }, 1000);
+// for (let index = 0; index < 300; index++) {
+//   const element = index;
+//   console.log(element);
+// }
+// console.log("3rd task");
 
-// 1. Asynchronous programming with Callbacks (the old way)
-// ---------------------------------------------------------
+// console.log("4th task");
 
-// console.log("--- Example 1: Using Callbacks with setTimeout ---");
+// callback function
 
-// function delayedGreeting(callback) {
-//   console.log("Timer started (2 seconds)...");
+// function hod(name, callback) {
+//   callback(name);
+// }
+
+// function printName(name) {
+//   console.log("hello", name);
+// }
+
+// hod("rampravesh", printName);
+
+//❌❌❌❌❌❌ wrong example
+
+// console.log("1. fetching data........\n ");
+// function fetchData() {
 //   setTimeout(() => {
-//     // This code runs after 2000 milliseconds (2 seconds)
-//     console.log("Timer finished!");
-//     callback("Hello from the past!");
+//     console.log("first callback");
+//     setTimeout(() => {
+//       console.log("second callback");
+//     }, 1000);
 //   }, 2000);
 // }
+// fetchData();
 
-// delayedGreeting((message) => {
-//   console.log("Callback executed:", message);
+// function getData(data, callback) {
+//   setTimeout(() => {
+//     console.log(data);
+//     if (callback) {
+//       callback();
+//     }
+//   }, 2000);
+// }
+// console.log("fetching first data....");
+// getData("data", () => {
+//   getData("data 2", () => {
+//     getData("data 3", () => {
+//       getData("data 4");
+//     });
+//   });
 // });
 
-// console.log("This message is logged immediately, before the timer finishes.");
+//✔️✔️✔️✔️ right example
 
-// 2. Asynchronous programming with Promises (the modern way)
-// ----------------------------------------------------------
-
-// console.log("\n--- Example 2: Using Promises ---");
-
-// function fetchData() {
-//   // A Promise is an object representing the eventual completion or failure of an async operation.
-//   return new Promise((resolve, reject) => {
-//     console.log("Fetching data from server... (will take 3 seconds)");
-//     setTimeout(() => {
-//       const success = true; // Change to false to simulate an error
-//       if (success) {
-//         const data = { userId: 1, name: "John Doe", role: "Admin" };
-//         // 'resolve' is called when the operation is successful.
-//         resolve(data);
-//       } else {
-//         // 'reject' is called when an error occurs.
-//         reject("Error: Failed to fetch data from the server.");
-//       }
-//     }, 3000);
-//   });
+// function fetchData(callback) {
+//   console.log("Fetching data...");
+//   setTimeout(() => {
+//     const data = { id: 1, name: "Product A" };
+//     console.log("Data fetched:", data);
+//     callback(data);
+//   }, 1000);
 // }
 
-// fetchData()
-//   .then((data) => {
-//     // .then() is executed when the promise is resolved (successful)
-//     console.log("Promise resolved! Data:", data);
-//   })
-//   .catch((error) => {
-//     // .catch() is executed when the promise is rejected (error)
-//     console.error("Promise rejected! Error:", error);
-//   })
-//   .finally(() => {
-//     // .finally() is always executed, regardless of success or failure.
-//     console.log("Fetch operation complete.");
-//   });
-
-// console.log("Promise has been dispatched. Code continues to run...");
-
-// 3. Asynchronous programming with Async/Await (the cleanest way)
-// ---------------------------------------------------------------
-// Async/Await is syntactic sugar over Promises, making async code look synchronous.
-
-// console.log("\n--- Example 3: Using Async/Await ---");
-
-// // You must declare a function as 'async' to use 'await' inside it.
-// async function processUserData() {
-//   try {
-//     console.log("Waiting to fetch user data...");
-//     const userData = await fetchData(); // Pauses execution until the promise resolves
-//     console.log("Async/Await: Data received!", userData);
-//     console.log("Now we can work with the data as if it were synchronous.");
-//   } catch (error) {
-//     console.error("Async/Await: An error occurred!", error);
-//   }
+// function processData(data, callback) {
+//   console.log("Processing data:", data);
+//   setTimeout(() => {
+//     const processedData = { ...data, processed: true };
+//     console.log("Data processed:", processedData);
+//     callback(processedData);
+//   }, 1000);
 // }
 
-// processUserData();
+// function saveData(processedData, callback) {
+//   console.log("Saving data:", processedData);
+//   setTimeout(() => {
+//     const savedResult = { success: true, item: processedData };
+//     console.log("Data saved:", savedResult);
+//     callback(savedResult);
+//   }, 1000);
+// }
 
-// console.log("Script End. Waiting for async operations to complete.");
+// console.log("Starting data flow with callback hell:");
+// fetchData((data) => {
+//   processData(data, (processedData) => {
+//     saveData(processedData, (result) => {
+//       console.log("All operations complete:", result);
+//     });
+//   });
+// });
 
-async function fetchData() {
-  let response = await fetch("https://jsonplaceholder.typicode.com/users");
-  console.log(await response.json());
-}
-fetchData();
+//🚧🚧🚧 promises 😂😂😂😂😂
+
+let p1 = new Promise(() => {
+  console.log("promise");
+});
+console.log(p1);
+console.log("promise come after this");
