@@ -145,63 +145,96 @@
 
 // 🚀 Let's chain some Promises for a cleaner asynchronous flow!
 
+// function fetchData() {
+//   return new Promise((resolve, reject) => {
+//     console.log("Fetching data...");
+//     setTimeout(() => {
+//       const success = true; // Simulate success or failure
+//       if (success) {
+//         resolve({ id: 1, name: "Product A" });
+//       } else {
+//         reject("Failed to fetch data.");
+//       }
+//     }, 1500);
+//   });
+// }
 
-function fetchData() {
-  return new Promise((resolve, reject) => {
-    console.log("Fetching data...");
-    setTimeout(() => {
-      const success = true; // Simulate success or failure
-      if (success) {
-        resolve({ id: 1, name: "Product A" });
-      } else {
-        reject("Failed to fetch data.");
-      }
-    }, 1500);
-  });
-}
+// function processData(data) {
+//   return new Promise((resolve, reject) => {
+//     console.log("Processing data:", data);
+//     setTimeout(() => {
+//       if (data && data.id) {
+//         const processedData = { ...data, processed: true, timestamp: new Date() };
+//         resolve(processedData);
+//       } else {
+//         reject("Invalid data for processing.");
+//       }
+//     }, 1000);
+//   });
+// }
 
-function processData(data) {
-  return new Promise((resolve, reject) => {
-    console.log("Processing data:", data);
-    setTimeout(() => {
-      if (data && data.id) {
-        const processedData = { ...data, processed: true, timestamp: new Date() };
-        resolve(processedData);
-      } else {
-        reject("Invalid data for processing.");
-      }
-    }, 1000);
-  });
-}
+// function saveData(processedData) {
+//   return new Promise((resolve, reject) => {
+//     console.log("Saving data:", processedData);
+//     setTimeout(() => {
+//       const success = true; // Simulate success or failure
+//       if (success) {
+//         resolve({ success: true, item: processedData, message: "Data saved successfully!" });
+//       } else {
+//         reject("Failed to save data.");
+//       }
+//     }, 1200);
+//   });
+// }
 
-function saveData(processedData) {
-  return new Promise((resolve, reject) => {
-    console.log("Saving data:", processedData);
-    setTimeout(() => {
-      const success = true; // Simulate success or failure
-      if (success) {
-        resolve({ success: true, item: processedData, message: "Data saved successfully!" });
-      } else {
-        reject("Failed to save data.");
-      }
-    }, 1200);
-  });
-}
+// console.log("Starting data flow with Promises:");
 
-console.log("Starting data flow with Promises:");
+// fetchData()
+//   .then((data) => {
+//     console.log("Data fetched successfully:", data);
+//     return processData(data);
+//   })
+//   .then((processedData) => {
+//     console.log("Data processed successfully:", processedData);
+//     return saveData(processedData);
+//   })
+//   .then((result) => {
+//     console.log("All operations complete:", result);
+//   })
+//   .catch((error) => {
+//     console.error("An error occurred in the promise chain:", error);
+//   });
 
-fetchData()
-  .then((data) => {
-    console.log("Data fetched successfully:", data);
-    return processData(data);
-  })
-  .then((processedData) => {
-    console.log("Data processed successfully:", processedData);
-    return saveData(processedData);
-  })
-  .then((result) => {
-    console.log("All operations complete:", result);
-  })
-  .catch((error) => {
-    console.error("An error occurred in the promise chain:", error);
-  });
+// 🌐 Real-world example with Promises: Fetching data from an API!
+
+// let response = fetch("https://jsonplaceholder.typicode.com/todos");
+// response
+//   .then((data) => {
+//     console.log(data);
+//     return data.json();
+//   })
+//   .then((data) => {
+//     console.log(data);
+//   })
+//   .catch((error) => {
+//     console.log(error);
+//   });
+
+// 🚀 Async/Await example: Making asynchronous code look synchronous!
+
+// function getData(data) {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       resolve(data);
+//     }, 2000);
+//   });
+// }
+// async function fetchData() {
+//   let data1 = await getData("data 1 resolve");
+//   console.log(data1);
+//   console.log("hello");
+//   console.log("hello1");
+//   console.log("hello2");
+
+// }
+// fetchData();
