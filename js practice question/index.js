@@ -36,7 +36,7 @@ console.log(returnString(arr)); */
 
 // 5️⃣ Find the maximum number in an array
 // 1️⃣method
-let arr = [1, 2, 3, 7, 5, 6];
+/* let arr = [1, 2, 3, 7, 5, 6];
 let result = arr[0];
 for (let i = 0; i < arr.length; i++) {
   if (arr[i] > result) {
@@ -46,4 +46,4 @@ for (let i = 0; i < arr.length; i++) {
 console.log(result);
 //2️⃣ method
 const maxNumber = Math.max(...arr);
-console.log(maxNumber);
+console.log(maxNumber); */
