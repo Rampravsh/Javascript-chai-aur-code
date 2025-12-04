@@ -47,3 +47,19 @@ console.log(result);
 //2️⃣ method
 const maxNumber = Math.max(...arr);
 console.log(maxNumber); */
+
+// 6️⃣ Write a function that returns the length of a given object (number of keys).
+
+let obj = {
+  key: "value",
+  name: "rampravesh",
+  fullName: "rpk",
+};
+function objLength(obj) {
+  let objLen = 0;
+  for (const element in obj) {
+    objLen = objLen + 1;
+  }
+  console.log(objLen);
+}
+objLength(obj);
