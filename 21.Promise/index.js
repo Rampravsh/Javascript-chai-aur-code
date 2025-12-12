@@ -82,3 +82,18 @@
 
 // let p1 = new Person("sdfk", "sfkshf", 8279847892);
 // console.log(p1.getContact());
+
+// 📂📂prototype and inheritance
+
+const p1 = {
+  name: "rampravesh ",
+  lname: "kumar",
+  contact: 1234567890,
+  getContact: function () {
+    return this.contact;
+  },
+};
+
+const p2 = Object.create(p1);
+console.log(p1);
+console.log(p2);
