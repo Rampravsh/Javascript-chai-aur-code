@@ -19,20 +19,56 @@
 
 // console.log(Bmw,toyota,buggati)
 
-class Car {
-  #fuel = 100;
+// class Car {
+//   #fuel = 100;
 
-  #burnFuel() {
-    this.#fuel -= 1;
+//   #burnFuel() {
+//     this.#fuel -= 1;
+//   }
+//   start() {
+//     this.#burnFuel();
+//     console.log("car is Starting");
+//   }
+// }
+
+// let buggati = new Car();
+
+// console.log(buggati);
+// buggati.start();
+// console.log(buggati);
+
+class BankAccount {
+  #balance = 100;
+  constructor(holderName, balance) {
+    this.holderName = holderName;
+    this.#balance = balance;
   }
-  start() {
-    this.#burnFuel();
-    console.log("car is Starting");
+
+  deposit(balance) {
+    this.#balance += balance;
+  }
+  credit(balance) {
+    this.#balance -= balance;
+  }
+
+  set Balance(balance) {
+    if (isNaN(balance)) {
+      console.error("invalid balance to set");
+      return;
+    }
+    this.#balance = balance;
+  }
+  get Balance() {
+    return this.#balance;
   }
 }
 
-let buggati = new Car();
+let rampraveshBnakAccount = new BankAccount("Rampravesh kumar", 5000);
 
-console.log(buggati);
-buggati.start();
-console.log(buggati);
+rampraveshBnakAccount.deposit(5000);
+console.log(rampraveshBnakAccount.Balance)
+console.log(rampraveshBnakAccount);
+
+console.log(rampraveshBnakAccount.deposit)
+
+
