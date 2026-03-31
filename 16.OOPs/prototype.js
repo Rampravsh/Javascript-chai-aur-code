@@ -9,7 +9,6 @@
 // let s1 = new Student("rampravesh", 20);
 // let s2 = new Student("ritika", 2);
 
-
 // s1.introduceMySelf();
 // s2.introduceMySelf();
 
@@ -22,11 +21,8 @@
 // console.log(s1);
 // console.log(s2);
 
-
 // s1.introduceMySelf();
 // s2.introduceMySelf();
-
-
 
 // function BankAccount(holderName, balance) {
 //   this.holderName = holderName;
@@ -56,7 +52,6 @@
 
 // console.log(account1.getBalance());
 // console.log(account2.getBalance());
-
 
 class BankAccount {
   constructor(holderName, balance) {
